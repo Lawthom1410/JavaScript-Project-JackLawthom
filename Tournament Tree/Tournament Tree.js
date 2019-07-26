@@ -12,7 +12,7 @@ if (tournamentId == 0) {
         createPage();
     })
 } else {
-    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/getTournamentMatches/" + tournamentId).then((value) => {
+    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/getTournamentMatches/" + tournamentId).then((value) => {
         console.log(value);
         loadMatches(value);
         createPage();
@@ -115,7 +115,7 @@ function createMatches() {
     // Post matches to database
     for (let row of matches) {
         for (let match of row) {
-            makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/createMatch", JSON.stringify(match));
+            makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/create", JSON.stringify(match));
         }
     }
 }
@@ -283,14 +283,14 @@ function progressPlayer(row, col, player) {
 
     // Update Database
     let matchIds = [];
-    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/getTournamentMatches/" + tournamentId).then((value) => {
+    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/getTournamentMatches/" + tournamentId).then((value) => {
         for (let dbMatch of value) {
             matchIds.push(dbMatch.matchId)
         }
         let matchIdCount = 0;
         for (let r in matches) {
             for (let c in matches[r]) {
-                makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/updateMatch/" + matchIds[matchIdCount], JSON.stringify(matches[r][c]));
+                makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/update/" + matchIds[matchIdCount], JSON.stringify(matches[r][c]));
                 matchIdCount++;
             }
         } 

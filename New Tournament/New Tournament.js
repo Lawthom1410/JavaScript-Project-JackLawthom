@@ -122,7 +122,7 @@ function createTournament() {
     sessionStorage.setItem('tournamentId', 0);
     sessionStorage.setItem('players', JSON.stringify(players));
     makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/create", JSON.stringify(tournamentData)).then(() => {
-        window.location.href = "file:///E:/QA%20Consulting/Project%20-%20Tournament%20Trees/JavaScript/Tournament%20Tree/Tournament%20Tree.html";
+        window.location.href = "file:///E:/QA%20Consulting/Project%20-%20Tournament%20Trees/JavaScript-Project-JackLawthom/Tournament%20Tree/Tournament%20Tree.html";
     });
     
 }
