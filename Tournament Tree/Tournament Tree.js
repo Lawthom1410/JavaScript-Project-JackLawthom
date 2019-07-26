@@ -4,16 +4,27 @@ let noOfColsMax = 1;
 let noOfRows = 1;
 let qualifyingMatches = 0;
 
+// Nav Paths
+for (let i of document.getElementsByClassName("href-home")) {
+    i.setAttribute("href", FILE_DIR + HOME_HTML);
+}
+for (let i of document.getElementsByClassName("href-players")) {
+    i.setAttribute("href", "#");
+}
+for (let i of document.getElementsByClassName("href-account")) {
+    i.setAttribute("href", "#");
+}
+
+// New or Load
 if (tournamentId == 0) {
-    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/getAll").then((value) => {
+    makeRequest("GET", LOCAL_URL + API_CALLER + GET_TOURNAMENT).then((value) => {
         tournamentId = value[value.length-1].tournamentId++;
         sessionStorage.setItem("tournamentId", tournamentId);
         createMatches();
         createPage();
     })
 } else {
-    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/getTournamentMatches/" + tournamentId).then((value) => {
-        console.log(value);
+    makeRequest("GET", LOCAL_URL + API_CALLER + GET_MATCH + tournamentId).then((value) => {
         loadMatches(value);
         createPage();
     })
@@ -115,13 +126,12 @@ function createMatches() {
     // Post matches to database
     for (let row of matches) {
         for (let match of row) {
-            makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/create", JSON.stringify(match));
+            makeRequest("POST", LOCAL_URL + API_CALLER + CRT_MATCH, JSON.stringify(match));
         }
     }
 }
 
 function loadMatches(data) {
-    // console.log(matches);
     let maxRow = 0;
     for (let match of data) {
         let row = match.treeRow;
@@ -146,7 +156,6 @@ function loadMatches(data) {
         }
     }
     noOfRows = maxRow;
-    console.log(matches);
 } 
 
 function createMatchCards() {
@@ -257,40 +266,30 @@ function progressPlayer(row, col, player) {
     }
     
     if (nextK == 0) {
-        if(matches[nextRow-1][nextCol-1].namePlayer1 == "") {
-            matches[nextRow-1][nextCol-1].namePlayer1 = player;
-        }
+        // if(matches[nextRow-1][nextCol-1].namePlayer1 == "") {
+        //     matches[nextRow-1][nextCol-1].namePlayer1 = player;
+        // }
+        matches[nextRow-1][nextCol-1].namePlayer1 = player;
     } else {
-        if(matches[nextRow-1][nextCol-1].namePlayer2 == "") {
-            matches[nextRow-1][nextCol-1].namePlayer2 = player;
-        }
+        // if(matches[nextRow-1][nextCol-1].namePlayer2 == "") {
+        //     matches[nextRow-1][nextCol-1].namePlayer2 = player;
+        // }
+        matches[nextRow-1][nextCol-1].namePlayer2 = player;
     }
-
-    // for (let i of matches) {
-    //     for (let match of i) {
-    //         if (match.treeRow == nextRow && match.treeCol == nextCol) {
-    //             if (nextK == 0) {
-    //                 match.namePlayer1 = player;
-    //             } else {
-    //                 match.namePlayer2 = player;
-    //             }
-    //         }
-    //     }
-    // }
     
     fillPlayers();
     sessionStorage.setItem('matches', JSON.stringify(matches));
 
     // Update Database
     let matchIds = [];
-    makeRequest("GET", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/getTournamentMatches/" + tournamentId).then((value) => {
+    makeRequest("GET", LOCAL_URL + API_CALLER + GET_MATCH + tournamentId).then((value) => {
         for (let dbMatch of value) {
             matchIds.push(dbMatch.matchId)
         }
         let matchIdCount = 0;
         for (let r in matches) {
             for (let c in matches[r]) {
-                makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Match/update/" + matchIds[matchIdCount], JSON.stringify(matches[r][c]));
+                makeRequest("POST", LOCAL_URL + API_CALLER + UPD_MATCH + matchIds[matchIdCount], JSON.stringify(matches[r][c]));
                 matchIdCount++;
             }
         } 
