@@ -1,6 +1,15 @@
 let playerCount = 0;
 let colCount = 1;
 let rowCount = 1;
+
+// Nav Paths
+for (let i of document.getElementsByClassName("href-home")) {
+    i.setAttribute("href", FILE_DIR + HOME_HTML);
+}
+for (let i of document.getElementsByClassName("href-account")) {
+    i.setAttribute("href", "#");
+}
+
 let noOfTournaments = sessionStorage.getItem("noOfTournaments");
 noOfTournaments++;
 document.getElementById("tourn-name").innerText = "Tournament " + noOfTournaments;
@@ -37,7 +46,6 @@ function addPlayer(form) {
         let col = 1;
         while (cardEl) {
             col = 0;
-            console.log(row);
             while (col <= 3 && cardEl) {
                 col++;
                 cardEl = document.getElementById("card" + row + "-" + col);
@@ -52,11 +60,10 @@ function addPlayer(form) {
             for (let i = 1; i <= 4; i++) {
                 createEl("div", rowDiv, null, "col" + rowCount + "-" + i, "col");
             }
-        }  
-        console.log(rowCount, colCount);      
+        }     
         
         let cardDiv = createEl("div", null, "col" + rowCount + "-" + colCount, "card" + rowCount + "-" + colCount, "card bg-light border-dark mb-5" , null, "width: fit-content;");
-        let headerDiv = createEl("div",cardDiv, null, null, "card-header", null);
+        let headerDiv = createEl("div",cardDiv, null, null, "card-header my-card-header", null);
         let nameDiv = createEl("div", headerDiv, null, "name" + rowCount + "-" + colCount, null, playerName);
         nameDiv.setAttribute("contenteditable", "true");
         deleteBtn(headerDiv);
@@ -111,18 +118,16 @@ function createTournament() {
         return array;
     }
     players = shuffleArray(players);
-    console.log(players);
 
     let tournamentName = document.getElementById("tourn-name").innerText
-
     let tournamentData = {
         tournamentName: tournamentName
     };
 
     sessionStorage.setItem('tournamentId', 0);
     sessionStorage.setItem('players', JSON.stringify(players));
-    makeRequest("POST", "http://localhost:8080/JavaEE-Project-JackLawthom/api/Tournament/create", JSON.stringify(tournamentData)).then(() => {
-        window.location.href = "file:///E:/QA%20Consulting/Project%20-%20Tournament%20Trees/JavaScript/Tournament%20Tree/Tournament%20Tree.html";
+    makeRequest("POST", LOCAL_URL + API_CALLER + CRT_TOURNAMENT, JSON.stringify(tournamentData)).then(() => {
+        window.location.href = FILE_DIR + "Tournament%20Tree/Tournament%20Tree.html";
     });
     
 }

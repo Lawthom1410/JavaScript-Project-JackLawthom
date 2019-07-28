@@ -77,3 +77,62 @@ a:hover {
     font-weight: bold;
 } */
 
+.tabs {
+    background: white;
+}
+
+.my-6 {
+    margin-top: 80px;
+}
+
+#btn-add-player {
+    font-weight: bold;
+}
+.my-btn-active:hover {
+    background: white;
+    color: rgb(22, 45, 76);
+    border-color: rgb(22, 45, 76);
+    border-width: 1;
+}
+.my-btn-active {
+    background: rgb(22, 45, 76);
+    color: white;
+}
+/* #btn-add-player:hover, #btn-create-tournament-active:hover {
+    background: white;
+    color: rgb(22, 45, 76);
+    border-color: rgb(22, 45, 76);
+    border-width: 1;
+} */
+
+.my-card-header {
+    color: rgb(22, 45, 76);
+    display: inline-flex;
+}
+
+.form-control {
+    border-color: rgb(22, 45, 76);
+    border-width: 1;
+}
+
+.jumbotron-heading {
+    color: rgb(22, 45, 76)
+}
+
+.centre-content {
+    display: flex;
+    justify-content: center;
+}
+
+/* #btn-create-tournament-active {
+    background: rgb(22, 45, 76);
+    color: white;
+} */
+
+#edit-name-input {
+    width: 5rem;
+}
+
+.my-edit-form {
+    margin: 0;
+}
