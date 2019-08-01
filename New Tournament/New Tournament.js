@@ -2,12 +2,17 @@ let playerCount = 0;
 let colCount = 1;
 let rowCount = 1;
 
+let userId = sessionStorage.getItem("userId");
+if (!userId) {
+    window.location = FILE_DIR + LOGIN_HTML;
+}
+
 // Nav Paths
 for (let i of document.getElementsByClassName("href-home")) {
     i.setAttribute("href", FILE_DIR + HOME_HTML);
 }
 for (let i of document.getElementsByClassName("href-account")) {
-    i.setAttribute("href", "#");
+    i.setAttribute("href", FILE_DIR + ACCOUNT_HTML);
 }
 
 let noOfTournaments = sessionStorage.getItem("noOfTournaments");
@@ -37,7 +42,7 @@ function addPlayer(form) {
             let createDiv = document.getElementById("create-tournament");
             createDiv.removeChild(btnCreate);
 
-            let btnNew = createEl("button", createDiv, null, "btn-create-tournament-active", "btn my-btn-active mt-3", "Create Tournament >");
+            let btnNew = createEl("button", createDiv, null, "btn-create-tournament-active", "btn my-btn-active mt-5 btn-lg", "Create Tournament >");
             btnNew.setAttribute("onclick", "createTournament()");            
         }
 
@@ -64,7 +69,7 @@ function addPlayer(form) {
         
         let cardDiv = createEl("div", null, "col" + rowCount + "-" + colCount, "card" + rowCount + "-" + colCount, "card bg-light border-dark mb-5" , null, "width: fit-content;");
         let headerDiv = createEl("div",cardDiv, null, null, "card-header my-card-header", null);
-        let nameDiv = createEl("div", headerDiv, null, "name" + rowCount + "-" + colCount, null, playerName);
+        let nameDiv = createEl("div", headerDiv, null, "name" + rowCount + "-" + colCount, null, playerName, "font-size: large");
         nameDiv.setAttribute("contenteditable", "true");
         deleteBtn(headerDiv);
     }
@@ -121,13 +126,14 @@ function createTournament() {
 
     let tournamentName = document.getElementById("tourn-name").innerText
     let tournamentData = {
-        tournamentName: tournamentName
+        tournamentName: tournamentName,
+        userId: userId
     };
 
     sessionStorage.setItem('tournamentId', 0);
     sessionStorage.setItem('players', JSON.stringify(players));
-    makeRequest("POST", LOCAL_URL + API_CALLER + CRT_TOURNAMENT, JSON.stringify(tournamentData)).then(() => {
-        window.location.href = FILE_DIR + "Tournament%20Tree/Tournament%20Tree.html";
+    makeRequest("POST", BASE_URL + API_CALLER + CRT_TOURNAMENT, JSON.stringify(tournamentData)).then(() => {
+        window.location.href = FILE_DIR + TOURNAMENT_TREE_HTML;
     });
     
 }
