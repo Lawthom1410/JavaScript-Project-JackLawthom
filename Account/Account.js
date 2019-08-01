@@ -7,7 +7,7 @@ for (let i of document.getElementsByClassName("href-home")) {
     i.setAttribute("href", FILE_DIR + HOME_HTML);
 }
 
-makeRequest("GET", BASE_URL + API_CALLER + GET_USR_BY_ID + userId).then((val) => {
+makeRequest("GET", ACTIVE_URL + API_CALLER + GET_USR_BY_ID + userId).then((val) => {
     const {password, userId, ...rest} = val;
     printUserDetails(rest)
 })
@@ -34,7 +34,7 @@ function printUserDetails(data) {
 }
 
 function deleteAccount() {
-    makeRequest("DELETE", BASE_URL + API_CALLER + DEL_USER + userId).then(() => {
+    makeRequest("DELETE", ACTIVE_URL + API_CALLER + DEL_USER + userId).then(() => {
         window.location = FILE_DIR + LOGIN_HTML;
     })
 }
@@ -49,7 +49,7 @@ function saveChanges() {
     userData["password"] = "";
     console.log(userData);
 
-    makeRequest("POST", BASE_URL + API_CALLER + UPD_USER + userId, JSON.stringify(userData)).then(() => {
+    makeRequest("POST", ACTIVE_URL + API_CALLER + UPD_USER + userId, JSON.stringify(userData)).then(() => {
         window.location = FILE_DIR + HOME_HTML;
     })
 }

@@ -6,7 +6,7 @@ function handleLogin(data) {
     const username = data.elements["username"].value;
     const password = data.elements["password"].value;
 
-    makeRequest("GET", BASE_URL + API_CALLER + LOGIN_USER + username + "/" + password)
+    makeRequest("GET", ACTIVE_URL + API_CALLER + LOGIN_USER + username + "/" + password)
     .then((val) => {
         if (val == "Invalid Username") {
             document.getElementById("username").setAttribute("class", "form-control my-inputs is-invalid")

@@ -129,7 +129,7 @@ function createTournament() {
 
     sessionStorage.setItem('tournamentId', 0);
     sessionStorage.setItem('players', JSON.stringify(players));
-    makeRequest("POST", BASE_URL + API_CALLER + CRT_TOURNAMENT, JSON.stringify(tournamentData)).then(() => {
+    makeRequest("POST", ACTIVE_URL + API_CALLER + CRT_TOURNAMENT, JSON.stringify(tournamentData)).then(() => {
         window.location.href = FILE_DIR + TOURNAMENT_TREE_HTML;
     });
     

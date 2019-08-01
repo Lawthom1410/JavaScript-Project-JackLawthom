@@ -10,7 +10,7 @@ function handleSubmit(data) {
         }
     }
 
-    makeRequest("POST", BASE_URL + API_CALLER + CRT_USER, JSON.stringify(userData)).then((val) => {
+    makeRequest("POST", ACTIVE_URL + API_CALLER + CRT_USER, JSON.stringify(userData)).then((val) => {
         console.log(val);
         if (val == "Username Taken") {
             document.getElementById("username").setAttribute("class", "form-control my-inputs is-invalid");

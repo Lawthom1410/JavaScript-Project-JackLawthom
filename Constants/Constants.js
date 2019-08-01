@@ -9,6 +9,7 @@ const ACCOUNT_HTML = "Account/Account.html";
 
 const LOCAL_URL = "http://localhost:8080";
 const BASE_URL = "http://35.246.76.186:8081"
+const ACTIVE_URL = LOCAL_URL;
 const API_CALLER = "/JavaEE-Project-JackLawthom/api"
 
 const CRT_TOURNAMENT = "/Tournament/create";

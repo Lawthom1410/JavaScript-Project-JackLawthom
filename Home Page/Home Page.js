@@ -4,7 +4,7 @@ if (!userId) {
 }
 
 let tournaments = [];
-makeRequest("GET", BASE_URL + API_CALLER + GET_TOURNAMENT + userId).then((value) => {
+makeRequest("GET", ACTIVE_URL + API_CALLER + GET_TOURNAMENT + userId).then((value) => {
     tournaments = value;
     createPage()
 });
@@ -37,7 +37,7 @@ function deleteBtn (nameDiv) {
 }
 
 function deleteTournament(delEl) {
-    makeRequest("DELETE", BASE_URL + API_CALLER + DEL_TOURNAMENT + JSON.parse(delEl.id).tournamentId).then(() => {
+    makeRequest("DELETE", ACTIVE_URL + API_CALLER + DEL_TOURNAMENT + JSON.parse(delEl.id).tournamentId).then(() => {
         window.location.href = FILE_DIR + HOME_HTML;
     })
 }
