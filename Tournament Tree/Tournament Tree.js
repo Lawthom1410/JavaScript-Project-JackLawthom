@@ -4,6 +4,11 @@ let noOfColsMax = 1;
 let noOfRows = 1;
 let qualifyingMatches = 0;
 
+let userId = sessionStorage.getItem("userId");
+if (!userId) {
+    window.location = FILE_DIR + LOGIN_HTML;
+}
+
 // Nav Paths
 for (let i of document.getElementsByClassName("href-home")) {
     i.setAttribute("href", FILE_DIR + HOME_HTML);
@@ -12,19 +17,19 @@ for (let i of document.getElementsByClassName("href-players")) {
     i.setAttribute("href", "#");
 }
 for (let i of document.getElementsByClassName("href-account")) {
-    i.setAttribute("href", "#");
+    i.setAttribute("href", FILE_DIR + ACCOUNT_HTML);
 }
 
 // New or Load
 if (tournamentId == 0) {
-    makeRequest("GET", LOCAL_URL + API_CALLER + GET_TOURNAMENT).then((value) => {
+    makeRequest("GET", BASE_URL + API_CALLER + GET_TOURNAMENT + userId).then((value) => {
         tournamentId = value[value.length-1].tournamentId++;
         sessionStorage.setItem("tournamentId", tournamentId);
         createMatches();
         createPage();
     })
 } else {
-    makeRequest("GET", LOCAL_URL + API_CALLER + GET_MATCH + tournamentId).then((value) => {
+    makeRequest("GET", BASE_URL + API_CALLER + GET_MATCH + tournamentId).then((value) => {
         loadMatches(value);
         createPage();
     })
@@ -126,7 +131,7 @@ function createMatches() {
     // Post matches to database
     for (let row of matches) {
         for (let match of row) {
-            makeRequest("POST", LOCAL_URL + API_CALLER + CRT_MATCH, JSON.stringify(match));
+            makeRequest("POST", BASE_URL + API_CALLER + CRT_MATCH, JSON.stringify(match));
         }
     }
 }
@@ -135,11 +140,11 @@ function loadMatches(data) {
     let maxRow = 0;
     for (let match of data) {
         let row = match.treeRow;
-        if (row > maxRow) {
+        while (row > maxRow) {
             matches.push([]);
-            maxRow = row;
+            maxRow++;
         } 
-
+        
         let colMax = matches[row-1].length;
         let col = match.treeCol;
         while (col > colMax) {
@@ -266,14 +271,8 @@ function progressPlayer(row, col, player) {
     }
     
     if (nextK == 0) {
-        // if(matches[nextRow-1][nextCol-1].namePlayer1 == "") {
-        //     matches[nextRow-1][nextCol-1].namePlayer1 = player;
-        // }
         matches[nextRow-1][nextCol-1].namePlayer1 = player;
     } else {
-        // if(matches[nextRow-1][nextCol-1].namePlayer2 == "") {
-        //     matches[nextRow-1][nextCol-1].namePlayer2 = player;
-        // }
         matches[nextRow-1][nextCol-1].namePlayer2 = player;
     }
     
@@ -282,14 +281,14 @@ function progressPlayer(row, col, player) {
 
     // Update Database
     let matchIds = [];
-    makeRequest("GET", LOCAL_URL + API_CALLER + GET_MATCH + tournamentId).then((value) => {
+    makeRequest("GET", BASE_URL + API_CALLER + GET_MATCH + tournamentId).then((value) => {
         for (let dbMatch of value) {
             matchIds.push(dbMatch.matchId)
         }
         let matchIdCount = 0;
         for (let r in matches) {
             for (let c in matches[r]) {
-                makeRequest("POST", LOCAL_URL + API_CALLER + UPD_MATCH + matchIds[matchIdCount], JSON.stringify(matches[r][c]));
+                makeRequest("POST", BASE_URL + API_CALLER + UPD_MATCH + matchIds[matchIdCount], JSON.stringify(matches[r][c]));
                 matchIdCount++;
             }
         } 

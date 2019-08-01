@@ -136,3 +136,24 @@ a:hover {
 .my-edit-form {
     margin: 0;
 }
+
+.my-inputs {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+}
+
+.my-container { 
+    height: auto;
+    position: relative;
+    border: 3px solid green; 
+  }
+  
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
