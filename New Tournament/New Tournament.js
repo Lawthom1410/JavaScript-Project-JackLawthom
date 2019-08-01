@@ -29,7 +29,6 @@ function addPlayer(form) {
     let pn = form.elements[0].value.split(" ");
     let newPN = "";
     for (let i in pn) {
-        console.log(pn[i]);
         newPN += pn[i].charAt(0).toUpperCase() + pn[i].slice(1) + " ";
     }
     playerName = newPN;
@@ -87,11 +86,9 @@ function deletePlayer(delEl) {
         let createDiv = document.getElementById("create-tournament");
         createDiv.removeChild(btnCreate);
 
-        let btnNew = createEl("button", createDiv, null, "btn-create-tournament", "btn btn-secondary mt-5", "Create Tournament >");   
+        let btnNew = createEl("button", createDiv, null, "btn-create-tournament", "btn btn-secondary mt-5 btn-lg", "Create Tournament >");   
         btnNew.setAttribute("disabled", "");     
     }
-
-    console.log(players);
 }
 
 function createTournament() {
