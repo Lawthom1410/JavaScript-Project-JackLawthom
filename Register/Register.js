@@ -1,5 +1,5 @@
 function loginPage() {
-    window.location = FILE_DIR + LOGIN_HTML;
+    window.location = ACTIVE_DIR + LOGIN_HTML;
 }
 
 function handleSubmit(data) {

@@ -1,4 +1,6 @@
-const FILE_DIR = "file:///E:/QA%20Consulting/Project%20-%20Tournament%20Trees/JavaScript-Project-JackLawthom/";
+const LOCAL_DIR = "file:///E:/QA%20Consulting/Project%20-%20Tournament%20Trees/JavaScript-Project-JackLawthom/";
+const BASE_DIR = "https://lawthom1410.github.io/JavaScript-Project-JackLawthom/";
+const ACTIVE_DIR = BASE_DIR;
 const LOGIN_HTML = "Login/Login.html";
 const REGISTER_HTML = "Register/Register.html";
 const HOME_HTML = "Home%20Page/Home%20Page.html";
@@ -8,8 +10,8 @@ const ACCOUNT_HTML = "Account/Account.html";
 
 
 const LOCAL_URL = "http://localhost:8080";
-const BASE_URL = "http://35.246.76.186:8081"
-const ACTIVE_URL = LOCAL_URL;
+const BASE_URL = "http://35.234.133.160:8081"
+const ACTIVE_URL = BASE_URL;
 const API_CALLER = "/JavaEE-Project-JackLawthom/api"
 
 const CRT_TOURNAMENT = "/Tournament/create";

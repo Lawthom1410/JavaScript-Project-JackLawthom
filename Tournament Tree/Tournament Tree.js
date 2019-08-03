@@ -6,18 +6,18 @@ let qualifyingMatches = 0;
 
 let userId = sessionStorage.getItem("userId");
 if (!userId) {
-    window.location = FILE_DIR + LOGIN_HTML;
+    window.location = ACTIVE_DIR + LOGIN_HTML;
 }
 
 // Nav Paths
 for (let i of document.getElementsByClassName("href-home")) {
-    i.setAttribute("href", FILE_DIR + HOME_HTML);
+    i.setAttribute("href", ACTIVE_DIR + HOME_HTML);
 }
 for (let i of document.getElementsByClassName("href-players")) {
     i.setAttribute("href", "#");
 }
 for (let i of document.getElementsByClassName("href-account")) {
-    i.setAttribute("href", FILE_DIR + ACCOUNT_HTML);
+    i.setAttribute("href", ACTIVE_DIR + ACCOUNT_HTML);
 }
 
 // New or Load
@@ -277,7 +277,7 @@ function progressPlayer(row, col, player) {
     }
     
     fillPlayers();
-    sessionStorage.setItem('matches', JSON.stringify(matches));
+    // sessionStorage.setItem('matches', JSON.stringify(matches));
 
     // Update Database
     let matchIds = [];

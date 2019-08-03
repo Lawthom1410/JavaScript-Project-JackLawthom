@@ -1,10 +1,10 @@
 let userId = sessionStorage.getItem("userId");
 if (!userId) {
-    window.location = FILE_DIR + LOGIN_HTML;
+    window.location = ACTIVE_DIR + LOGIN_HTML;
 }
 // Nav Paths
 for (let i of document.getElementsByClassName("href-home")) {
-    i.setAttribute("href", FILE_DIR + HOME_HTML);
+    i.setAttribute("href", ACTIVE_DIR + HOME_HTML);
 }
 
 makeRequest("GET", ACTIVE_URL + API_CALLER + GET_USR_BY_ID + userId).then((val) => {
@@ -35,7 +35,7 @@ function printUserDetails(data) {
 
 function deleteAccount() {
     makeRequest("DELETE", ACTIVE_URL + API_CALLER + DEL_USER + userId).then(() => {
-        window.location = FILE_DIR + LOGIN_HTML;
+        signOut();
     })
 }
 
@@ -50,11 +50,11 @@ function saveChanges() {
     console.log(userData);
 
     makeRequest("POST", ACTIVE_URL + API_CALLER + UPD_USER + userId, JSON.stringify(userData)).then(() => {
-        window.location = FILE_DIR + HOME_HTML;
+        window.location = ACTIVE_DIR + HOME_HTML;
     })
 }
 
 function signOut() {
     sessionStorage.clear();
-    window.location = FILE_DIR + LOGIN_HTML;
+    window.location = ACTIVE_DIR + LOGIN_HTML;
 }

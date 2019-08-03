@@ -1,5 +1,5 @@
 function registerPage() {
-    window.location = FILE_DIR + REGISTER_HTML;
+    window.location = ACTIVE_DIR + REGISTER_HTML;
 }
 
 function handleLogin(data) {
@@ -22,7 +22,7 @@ function handleLogin(data) {
             console.log(val);
         } else {
             sessionStorage.setItem("userId", JSON.stringify(val));
-            window.location = FILE_DIR + HOME_HTML;
+            window.location = ACTIVE_DIR + HOME_HTML;
         }
         })
     return false;

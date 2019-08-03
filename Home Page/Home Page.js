@@ -1,6 +1,6 @@
 let userId = sessionStorage.getItem("userId");
 if (!userId) {
-    window.location = FILE_DIR + LOGIN_HTML;
+    window.location = ACTIVE_DIR + LOGIN_HTML;
 }
 
 let tournaments = [];
@@ -11,10 +11,10 @@ makeRequest("GET", ACTIVE_URL + API_CALLER + GET_TOURNAMENT + userId).then((valu
 
 // Nav Paths
 for (let i of document.getElementsByClassName("href-home")) {
-    i.setAttribute("href", FILE_DIR + HOME_HTML);
+    i.setAttribute("href", ACTIVE_DIR + HOME_HTML);
 }
 for (let i of document.getElementsByClassName("href-account")) {
-    i.setAttribute("href", FILE_DIR + ACCOUNT_HTML);
+    i.setAttribute("href", ACTIVE_DIR + ACCOUNT_HTML);
 }
 
 function createPage() {
@@ -38,17 +38,17 @@ function deleteBtn (nameDiv) {
 
 function deleteTournament(delEl) {
     makeRequest("DELETE", ACTIVE_URL + API_CALLER + DEL_TOURNAMENT + JSON.parse(delEl.id).tournamentId).then(() => {
-        window.location.href = FILE_DIR + HOME_HTML;
+        window.location.href = ACTIVE_DIR + HOME_HTML;
     })
 }
 
 function newTournament() {
     sessionStorage.setItem("noOfTournaments", tournaments.length);
-    window.location.href = FILE_DIR + NEW_TOURNAMENT_TREE_HTML;
+    window.location.href = ACTIVE_DIR + NEW_TOURNAMENT_TREE_HTML;
 }
 
 function loadTournament(data) {
     console.log(data)
     sessionStorage.setItem("tournamentId", JSON.stringify(JSON.parse(data.id).tournamentId));
-    window.location.href = FILE_DIR + TOURNAMENT_TREE_HTML;
+    window.location.href = ACTIVE_DIR + TOURNAMENT_TREE_HTML;
 }

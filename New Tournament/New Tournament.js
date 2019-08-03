@@ -4,15 +4,15 @@ let rowCount = 1;
 
 let userId = sessionStorage.getItem("userId");
 if (!userId) {
-    window.location = FILE_DIR + LOGIN_HTML;
+    window.location = ACTIVE_DIR + LOGIN_HTML;
 }
 
 // Nav Paths
 for (let i of document.getElementsByClassName("href-home")) {
-    i.setAttribute("href", FILE_DIR + HOME_HTML);
+    i.setAttribute("href", ACTIVE_DIR + HOME_HTML);
 }
 for (let i of document.getElementsByClassName("href-account")) {
-    i.setAttribute("href", FILE_DIR + ACCOUNT_HTML);
+    i.setAttribute("href", ACTIVE_DIR + ACCOUNT_HTML);
 }
 
 let noOfTournaments = sessionStorage.getItem("noOfTournaments");
@@ -130,7 +130,7 @@ function createTournament() {
     sessionStorage.setItem('tournamentId', 0);
     sessionStorage.setItem('players', JSON.stringify(players));
     makeRequest("POST", ACTIVE_URL + API_CALLER + CRT_TOURNAMENT, JSON.stringify(tournamentData)).then(() => {
-        window.location.href = FILE_DIR + TOURNAMENT_TREE_HTML;
+        window.location.href = ACTIVE_DIR + TOURNAMENT_TREE_HTML;
     });
     
 }
