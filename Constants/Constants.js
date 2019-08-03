@@ -10,7 +10,7 @@ const ACCOUNT_HTML = "Account/Account.html";
 
 
 const LOCAL_URL = "http://localhost:8080";
-const BASE_URL = "https://35.234.133.160:8081"
+const BASE_URL = "http://35.234.133.160:8081"
 const ACTIVE_URL = BASE_URL;
 const API_CALLER = "/JavaEE-Project-JackLawthom/api"
 
