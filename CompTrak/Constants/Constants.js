@@ -1,5 +1,5 @@
 const LOCAL_DIR = "file:///E:/QA%20Consulting/Project%20-%20Tournament%20Trees/JavaScript-Project-JackLawthom/";
-const BASE_DIR = "https://lawthom1410.github.io/JavaScript-Project-JackLawthom/";
+const BASE_DIR = "https://lawthom1410.github.io/JavaScript-Project-JackLawthom/CompTrak";
 const ACTIVE_DIR = BASE_DIR;
 const LOGIN_HTML = "Login/Login.html";
 const REGISTER_HTML = "Register/Register.html";
