@@ -1,3 +1,8 @@
+const hrefComptrak = document.getElementsByClassName("href-comptrak");
+for (let el of hrefComptrak) {
+    el.addEventListener("click", () => comptrak());
+}
+
 function comptrak() {
     window.location = "CompTrak/Login/Login.html";
 }
